@@ -141,6 +141,19 @@ DAT.Globe = function(container, opts) {
 
     point = new THREE.Mesh(geometry);
 
+    var texture = THREE.ImageUtils.loadTexture('starfield.jpg');
+    console.log(texture);
+
+    var backgroundMesh = new THREE.Mesh(new THREE.BoxGeometry(10000, 10000, 10000), new THREE.MeshBasicMaterial({
+
+        map: texture,
+
+        side: THREE.DoubleSide
+
+    }));
+
+    scene.add(backgroundMesh);
+
     renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
     renderer.setSize(w, h);
 
