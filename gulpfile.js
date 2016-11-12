@@ -8,7 +8,10 @@ var uglify = require('gulp-uglify');
 
 gulp.task('copy', function() {
   gulp.src(['node_modules/d3/build/d3.js', 'node_modules/d3/build/d3.min.js'])
-    .pipe(gulp.dest('public/vendor/d3'))
+    .pipe(gulp.dest('public/vendor/d3/build'));
+
+  gulp.src(['node_modules/d3-*/build/d3-*.js', 'node_modules/d3-*/build/d3-*.min.js'])
+    .pipe(gulp.dest('public/vendor/'));
 });
 
 gulp.task('default', ['copy']);
