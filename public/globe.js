@@ -141,7 +141,7 @@ DAT.Globe = function(container, opts) {
 
     point = new THREE.Mesh(geometry);
 
-    renderer = new THREE.WebGLRenderer({antialias: true});
+    renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
     renderer.setSize(w, h);
 
     renderer.domElement.style.position = 'absolute';
@@ -352,6 +352,7 @@ DAT.Globe = function(container, opts) {
   }
 
   function render() {
+    renderer.clearColor();
     zoom(curZoomSpeed);
 
     rotation.x += (target.x - rotation.x) * 0.1;
