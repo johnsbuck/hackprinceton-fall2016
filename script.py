@@ -11,6 +11,9 @@ with open('meteorite-landings.csv', 'rb') as file:
 def hasNumbers(inputString):
     return any(char.isdigit() for char in inputString)
 
+def feature_scale(nparray):
+    return (nparray - np.amin(nparray))/(np.amax(nparray) - np.amin(nparray))
+
 i = 0
 while i < len(X):
     try:
@@ -24,15 +27,15 @@ while i < len(X):
 X = np.asarray(X)
 
 mass = X[1:,4].astype(np.float)
-new_mass = np.log(np.sort(mass)+1)
-mass_indices = np.indices(new_mass.shape)[0]
-new_mass = new_mass.reshape(new_mass.shape[0],1)
-mass_indices = mass_indices.reshape(mass_indices.shape[0],1)
+new_mass = np.log(np.log(np.sort(mass)+1)+1)
+new_mass = (new_mass - np.amin(new_mass))/(np.amax(new_mass) - np.amin(new_mass))
 
-linear = linear_model.LinearRegression().fit(new_mass[:new_mass.shape[0]/2], mass_indices[:mass_indices.shape[0]/2])
-plt.scatter(new_mass[new_mass.shape[0]/2:], mass_indices[mass_indices.shape[0]/2:], color="red")
+indices = feature_scale(np.arange(mass.shape[0]).astype(float))
 
-plt.plot(new_mass[new_mass.shape[0]/2:], linear.predict(new_mass[new_mass.shape[0]/2:]), color="blue", linewidth=3)
+plt.plot(new_mass, color="red")
+plt.plot(indices, color="blue")
+plt.plot(feature_scale(np.log(np.sort(mass).astype(float) + 1)), color="purple")
+plt.plot(feature_scale(np.sort(mass).astype(float)), color='green')
 
 plt.ylabel('Mass')
 plt.xlabel('Index')
