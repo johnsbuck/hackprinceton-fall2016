@@ -26,12 +26,14 @@ X = np.asarray(X)
 mass = X[1:,4].astype(np.float)
 new_mass = np.log(np.sort(mass)+1)
 mass_indices = np.indices(new_mass.shape)[0]
-new_mass = new_mass.reshape(1, new_mass.shape[0])
-mass_indices = mass_indices.reshape(1, mass_indices.shape[0])
+new_mass = new_mass.reshape(new_mass.shape[0],1)
+mass_indices = mass_indices.reshape(mass_indices.shape[0],1)
 
-linear = linear_model.LinearRegression().fit(new_mass, mass_indices)
+linear = linear_model.LinearRegression().fit(new_mass[:new_mass.shape[0]/2], mass_indices[:mass_indices.shape[0]/2])
+plt.scatter(new_mass[new_mass.shape[0]/2:], mass_indices[mass_indices.shape[0]/2:], color="red")
 
-plt.plot(np.log(np.sort(mass)+1), 'ro')
+plt.plot(new_mass[new_mass.shape[0]/2:], linear.predict(new_mass[new_mass.shape[0]/2:]), color="blue", linewidth=3)
+
 plt.ylabel('Mass')
 plt.xlabel('Index')
 plt.show()
