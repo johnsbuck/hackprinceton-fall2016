@@ -12,6 +12,9 @@ gulp.task('copy', function() {
 
   gulp.src(['node_modules/d3-*/build/d3-*.js', 'node_modules/d3-*/build/d3-*.min.js'])
     .pipe(gulp.dest('public/vendor/'));
+
+  gulp.src(['node_modules/three/build/three.js', 'node_modules/three/build/three.min.js'])
+    .pipe(gulp.dest('public/vendor/three/build'));
 });
 
 gulp.task('default', ['copy']);
