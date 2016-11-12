@@ -11,4 +11,4 @@ gulp.task('copy', function() {
     .pipe(gulp.dest('public/vendor/d3'))
 });
 
-gulp.task('default', [,'copy']);
+gulp.task('default', ['copy']);
