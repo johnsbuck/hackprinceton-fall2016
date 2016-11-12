@@ -34,7 +34,7 @@ indices = feature_scale(np.arange(mass.shape[0]).astype(float))
 
 plt.plot(new_mass, color="red")
 plt.plot(indices, color="blue")
-plt.plot(feature_scale(np.log(np.sort(mass).astype(float) + 1)), color="purple")
+plt.plot(feature_scale(np.log(np.sort(mass).astype(float) + 1)), color="purples")
 plt.plot(feature_scale(np.sort(mass).astype(float)), color='green')
 
 plt.ylabel('Mass')
