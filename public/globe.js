@@ -188,9 +188,8 @@ DAT.Globe = function(container, opts) {
         for (i = 0; i < data.length; i += step) {
           lat = data[i];
           lng = data[i + 1];
-//        size = data[i + 2];
           color = colorFnWrapper(data,i);
-          size = 0;
+          size = data[i+2]*10;
           addPoint(lat, lng, size, color, this._baseGeometry);
         }
       }
@@ -207,7 +206,7 @@ DAT.Globe = function(container, opts) {
       lng = data[i + 1];
       color = colorFnWrapper(data,i);
       size = data[i + 2];
-      size = size*200;
+      size = size*10;
       addPoint(lat, lng, size, color, subgeo);
     }
     if (opts.animated) {
@@ -257,7 +256,8 @@ DAT.Globe = function(container, opts) {
 
     point.lookAt(mesh.position);
 
-    point.scale.z = Math.max( size, 0.1 ); // avoid non-invertible matrix
+    point.scale.x = Math.max( size, 0.1 ); // avoid non-invertible matrix
+    point.scale.y = Math.max( size, 0.1 ); // avoid non-invertible matrix
     point.updateMatrix();
 
     for (var i = 0; i < point.geometry.faces.length; i++) {
