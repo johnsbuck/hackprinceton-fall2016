@@ -44,7 +44,7 @@ DAT.Globe = function(container, opts) {
         'void main() {',
           'vec3 diffuse = texture2D( texture, vUv ).xyz;',
           'float intensity = 1.05 - dot( vNormal, vec3( 0.0, 0.0, 1.0 ) );',
-          'vec3 atmosphere = vec3( 1.0, 1.0, 1.0 ) * pow( intensity, 3.0 );',
+          'vec3 atmosphere = vec3( 0.2, 0.8, 0.9 ) * pow( intensity, 3.0 );',
           'gl_FragColor = vec4( diffuse + atmosphere, 1.0 );',
         '}'
       ].join('\n')
@@ -61,8 +61,8 @@ DAT.Globe = function(container, opts) {
       fragmentShader: [
         'varying vec3 vNormal;',
         'void main() {',
-          'float intensity = pow( 0.8 - dot( vNormal, vec3( 0, 0, 1.0 ) ), 12.0 );',
-          'gl_FragColor = vec4( 1.0, 1.0, 1.0, 1.0 ) * intensity;',
+          'float intensity = pow( 0.87 - dot( vNormal, vec3( 0, 0, 1.0 ) ), 10.0 );',
+          'gl_FragColor = vec4( 0.2, 0.7, 1, 0.35 ) * intensity;',
         '}'
       ].join('\n')
     }
